@@ -1,0 +1,18 @@
+[package]
+name = "kyleh/mort-game"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+roact = "roblox/roact@1.4.4"
+knit = "sleitnick/knit@1.4.7"
+promise = "evaera/promise@4.0.0"
+cmdr = "evaera/cmdr@1.9.0"
+Trove = "sleitnick/trove@0.5.0"
+Component = "sleitnick/component@2.4.6"
+Signal = "sleitnick/signal@1.5.0"
+datastore2 = "nidoxs/datastore2@1.4.0"
+Comm = "sleitnick/comm@0.3.1"
+Flipper = "reselim/flipper@2.0.0"
+Silo = "sleitnick/silo@0.1.1"
