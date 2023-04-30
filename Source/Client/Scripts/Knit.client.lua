@@ -9,7 +9,9 @@ local Players = game:GetService("Players")
 
 local Knit = require(ReplicatedStorage:WaitForChild("Packages").knit)
 
-for _, v in pairs(script.Parent:GetDescendants()) do
+local Directory = ReplicatedStorage.Source.Client.Modules
+
+for _, v in pairs(Directory:GetDescendants()) do
 	if not v:IsA("ModuleScript") then
 		continue
 	end
@@ -29,7 +31,7 @@ end
 
 Knit.Start()
 	:andThen(function()
-		for _, v in pairs(script.Parent:GetDescendants()) do
+		for _, v in pairs(Directory:GetDescendants()) do
 			if not v:IsA("ModuleScript") then
 				continue
 			end

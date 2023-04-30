@@ -1,11 +1,10 @@
 --[[
 	This controller is responsible for handling the collectable spawning
-]]
 
-local CollectionService = game:GetService("CollectionService")
+	local CollectionService = game:GetService("CollectionService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Knit = require(ReplicatedStorage.Packages.Knit)
+local Knit = require(ReplicatedStorage.Packages.knit)
 
 local assets: Folder = ReplicatedStorage:FindFirstChild("Assets")
 local collectables: Folder = assets:FindFirstChild("Collectables")
@@ -76,3 +75,19 @@ end
 
 
 return CollectableController
+]]
+
+
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
+
+local Knit = require(ReplicatedStorage.Packages.knit)
+
+local CollectableController = Knit.CreateController { Name = "CollectableController" }
+
+function CollectableController:KnitInit()
+	print("CollectableController Initialised")
+end
+
+
+return CollectableController
+

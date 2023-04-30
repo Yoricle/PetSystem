@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Roact = require(ReplicatedStorage.Packages.Roact)
+local Roact = require(ReplicatedStorage.Packages.roact)
 
 local InventoryFrame = Roact.Component:extend("InventoryFrame")
 
@@ -33,10 +33,10 @@ function InventoryFrame:render()
             Size = UDim2.new(0.6, 0, 0.6,0),
             Position = UDim2.new(0.5, 0, 0.5, 0),
         },{
-            UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint",{
+            UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
-            })
-        })
+            }),
+        }),
     },{
         Shop = Roact.createElement("TextButton",{
             Name = "Shop",

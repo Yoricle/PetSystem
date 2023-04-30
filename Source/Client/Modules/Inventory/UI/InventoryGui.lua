@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Roact = require(ReplicatedStorage.Packages.Roact)
+local Roact = require(ReplicatedStorage.Packages.roact)
 local InventoryFrame = require(script.Parent.InventoryFrame)
 
 return function(props)
