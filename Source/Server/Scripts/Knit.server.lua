@@ -3,7 +3,7 @@ local ServerScriptService = game:GetService("ServerScriptService")
 
 local Directory = ServerScriptService.Source.Server.Modules
 
-local Knit = require(ReplicatedStorage.Packages.knit)
+local Knit = require(ReplicatedStorage.Packages.Knit)
 
 for _, v in pairs(Directory:GetDescendants()) do
 	if not v:IsA("ModuleScript") then

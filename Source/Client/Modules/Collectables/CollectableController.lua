@@ -80,7 +80,7 @@ return CollectableController
 
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 
-local Knit = require(ReplicatedStorage.Packages.knit)
+local Knit = require(ReplicatedStorage.Packages.Knit)
 
 local CollectableController = Knit.CreateController { Name = "CollectableController" }
 

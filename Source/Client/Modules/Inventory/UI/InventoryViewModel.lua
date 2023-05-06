@@ -12,12 +12,22 @@ function InventoryViewModel.new(): table
 
     self.value = 0
     self.popUpText = "" -- this will changed based on which button is hovered over
+    self.sizeX = 0.5
+    self.sizeY = 0.5
+
+    self.inventoryVisible = false
 
     return setmetatable(self, InventoryViewModel)
 end
 
-function InventoryViewModel:setValue(newValue: any)
-    self.value = newValue
+function InventoryViewModel:setInventorySize(scaleX: number, scaleY: number)
+    self.sizeX = scaleX
+    self.sizeY = scaleY
+    self:update()
+end
+
+function InventoryViewModel:setInventoryVisible(newValue : BoolValue)
+    self.inventoryVisible = newValue
     self:update()
 end
 

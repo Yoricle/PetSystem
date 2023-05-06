@@ -7,7 +7,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Players = game:GetService("Players")
 
-local Knit = require(ReplicatedStorage:WaitForChild("Packages").knit)
+local Knit = require(ReplicatedStorage:WaitForChild("Packages").Knit)
 
 local Directory = ReplicatedStorage.Source.Client.Modules
 
