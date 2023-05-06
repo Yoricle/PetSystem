@@ -1,20 +1,44 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Roact = require(ReplicatedStorage.Packages.roact)
+local Roact = require(ReplicatedStorage.Packages.Roact)
+local Knit = require(ReplicatedStorage.Packages.Knit)
+
+local Flipper = require(ReplicatedStorage.Packages.Flipper)
+local RoactFlipper = require(ReplicatedStorage.Packages.RoactFlipper)
 
 local InventoryFrame = Roact.Component:extend("InventoryFrame")
 
 function InventoryFrame:init()
     self:setState({
-        value = self.props.viewModel.value,
         popUpText = self.props.viewModel.popUpText,
+        sizeX = self.props.viewModel.sizeX,
+        sizeY = self.props.viewModel.sizeY,
+        inventoryVisible = self.props.viewModel.inventoryVisible
     })
+
+    -- Animation motor
+    self.shopMotor = Flipper.SingleMotor.new(1)
+    self.shopBinding = RoactFlipper.getBinding(self.shopMotor)
+
+    self.settingsMotor = Flipper.SingleMotor.new(1)
+    self.settingsBinding = RoactFlipper.getBinding(self.settingsMotor)
+
+    self.inventoryMotor = Flipper.SingleMotor.new(1)
+    self.inventoryBinding = RoactFlipper.getBinding(self.inventoryMotor)
+
+    self.tradingMotor = Flipper.SingleMotor.new(1)
+    self.tradingBinding = RoactFlipper.getBinding(self.tradingMotor)
+
+    self.achievementMotor = Flipper.SingleMotor.new(1)
+    self.achievementBinding = RoactFlipper.getBinding(self.achievementMotor)
 end
 
 function InventoryFrame:didMount()
     self.props.viewModel.updated:Connect(function(viewModel)
         self:setState({
-            value = viewModel.value,
+            sizeX = viewModel.sizeX,
+            sizeY = viewModel.sizeY,
+            inventoryVisible = viewModel.inventoryVisible -- false
         })
     end)
 end
@@ -31,21 +55,57 @@ function InventoryFrame:render()
             Name = "Inventory",
             Text = "Inventory",
             LayoutOrder = 1,
-            Size = UDim2.new(0.6, 0, 0.6,0),
+            Size = self.inventoryBinding:map(function(alpha) -- map binding to size property
+                return UDim2.new(0.8, 0, 0.8,0):Lerp(UDim2.new(0.6, 0, 0.6,0), alpha)
+            end),
             Position = UDim2.new(0.5, 0, 0.5, 0),
+
+            [Roact.Event.MouseEnter] = function()
+                self:setState({
+                    
+                })
+                self.inventoryMotor:setGoal(Flipper.Spring.new(0, {
+                    frequency = 4,
+                    dampingRatio = 0.75
+                }))
+            end,
+
+            [Roact.Event.MouseLeave] = function()
+                self.inventoryMotor:setGoal(Flipper.Spring.new(1, {
+                    frequency = 5,
+                    dampingRatio = 1
+                }))
+            end,
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
             }),
         }),
 
-
         Shop = Roact.createElement("TextButton", {
             Name = "Shop",
             Text = "Shop",
             LayoutOrder = 5,
-            Size = UDim2.new(0.6, 0, 0.6,0),
+
+            Size = self.shopBinding:map(function(alpha) -- map binding to size property
+                return UDim2.new(0.8, 0, 0.8,0):Lerp(UDim2.new(0.6, 0, 0.6,0), alpha)
+            end),
+
             Position = UDim2.new(0.5, 0, 0.5, 0),
+
+            [Roact.Event.MouseEnter] = function()
+                self.shopMotor:setGoal(Flipper.Spring.new(0, {
+                    frequency = 4,
+                    dampingRatio = 0.75
+                }))
+            end,
+
+            [Roact.Event.MouseLeave] = function()
+                self.shopMotor:setGoal(Flipper.Spring.new(1, {
+                    frequency = 5,
+                    dampingRatio = 1
+                }))
+            end,
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
@@ -56,8 +116,24 @@ function InventoryFrame:render()
             Name = "Settings",
             Text = "Settings",
             LayoutOrder = 6,
-            Size = UDim2.new(0.6, 0, 0.6,0),
+            Size = self.settingsBinding:map(function(value) -- map binding to size property
+                return UDim2.new(0.8, 0, 0.8,0):Lerp(UDim2.new(0.6, 0, 0.6,0), value)
+            end),
             Position = UDim2.new(0.5, 0, 0.5, 0),
+
+            [Roact.Event.MouseEnter] = function()
+                self.settingsMotor:setGoal(Flipper.Spring.new(0, {
+                    frequency = 4,
+                    dampingRatio = 0.75
+                }))
+            end,
+
+            [Roact.Event.MouseLeave] = function()
+                self.settingsMotor:setGoal(Flipper.Spring.new(1, {
+                    frequency = 5,
+                    dampingRatio = 1
+                }))
+            end,
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
@@ -68,8 +144,23 @@ function InventoryFrame:render()
             Name = "Trading",
             Text = "Trading",
             LayoutOrder = 3,
-            Size = UDim2.new(0.6, 0, 0.6,0),
+            Size = self.tradingBinding:map(function(alpha) -- map binding to size property
+                return UDim2.new(0.8, 0, 0.8,0):Lerp(UDim2.new(0.6, 0, 0.6,0), alpha)
+            end),
             Position = UDim2.new(0.5, 0, 0.5, 0),
+            [Roact.Event.MouseEnter] = function()
+                self.tradingMotor:setGoal(Flipper.Spring.new(0, {
+                    frequency = 4,
+                    dampingRatio = 0.75
+                }))
+            end,
+
+            [Roact.Event.MouseLeave] = function()
+                self.tradingMotor:setGoal(Flipper.Spring.new(1, {
+                    frequency = 5,
+                    dampingRatio = 1
+                }))
+            end,
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
@@ -80,8 +171,23 @@ function InventoryFrame:render()
             Name = "Achievements",
             Text = "Achievements",
             LayoutOrder = 4,
-            Size = UDim2.new(0.6, 0, 0.6,0),
+            Size = self.achievementBinding:map(function(alpha) -- map binding to size property
+                return UDim2.new(0.8, 0, 0.8,0):Lerp(UDim2.new(0.6, 0, 0.6,0), alpha)
+            end),
             Position = UDim2.new(0.5, 0, 0.5, 0),
+            [Roact.Event.MouseEnter] = function()
+                self.achievementMotor:setGoal(Flipper.Spring.new(0, {
+                    frequency = 4,
+                    dampingRatio = 0.75
+                }))
+            end,
+
+            [Roact.Event.MouseLeave] = function()
+                self.achievementMotor:setGoal(Flipper.Spring.new(1, {
+                    frequency = 5,
+                    dampingRatio = 1
+                }))
+            end,
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
