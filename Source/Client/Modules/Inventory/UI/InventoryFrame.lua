@@ -1,7 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local Roact = require(ReplicatedStorage.Packages.Roact)
-local Knit = require(ReplicatedStorage.Packages.Knit)
 
 local Flipper = require(ReplicatedStorage.Packages.Flipper)
 local RoactFlipper = require(ReplicatedStorage.Packages.RoactFlipper)
@@ -62,7 +61,7 @@ function InventoryFrame:render()
 
             [Roact.Event.MouseEnter] = function()
                 self:setState({
-                    
+
                 })
                 self.inventoryMotor:setGoal(Flipper.Spring.new(0, {
                     frequency = 4,
