@@ -20,7 +20,7 @@ local profiles = {} -- might want to define this table elsewhere
 local DEFAULT_COINS = 0
 
 local CoinService = Knit.CreateService {
-    Name = "ValueService",
+    Name = "CoinService",
     Client = {
         Amount = Knit.CreateProperty(DEFAULT_COINS)
     },

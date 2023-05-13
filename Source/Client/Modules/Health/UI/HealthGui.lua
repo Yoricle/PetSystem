@@ -5,8 +5,7 @@ local HealthFrame = require(script.Parent.HealthFrame)
 
 local HealthGui = Roact.Component:extend("MobileControlsGui")
 
-
-function HealthGui:init()
+function HealthGui:init(props)
     self:setState({
         adornee = self.props.viewModel.adornee,
     })

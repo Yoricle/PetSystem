@@ -13,18 +13,8 @@ local HealthViewModel = require(script.Parent.UI.HealthViewModel)
 
 local Coin = require(script.Parent.Coin)
 
+local viewModel = HealthViewModel.new() -- passing in the coinpile
 -- Components
-
-local viewModel = HealthViewModel.new()
-
-
-
-function CoinController:KnitInit()
-    --[[
-        When a coin pile is clicked, we want the health to be mounted onto
-        the coin pile, this is just a temporary test
-    ]]
-end
 
 function CoinController:KnitStart()
 
@@ -40,26 +30,15 @@ function CoinController:KnitStart()
     print("Roact HealthFrame Mounted")
 end
 
-function CoinController:EnableHealthBar() -- if you want to pass in a value you can, but for now it's visible
-    viewModel:setVisibility(true)
-end
-
 function CoinController:Attack(Part : BasePart | MeshPart)
-    local health : number = Part:SetAttribute("Health", viewModel.health)-- this will get the attribute of the coins health and assign it to the viewmodel
-    local maxHealth : number = Part:SetAttribute("MaxHealth", viewModel.maxHealth)
 
-    task.spawn(function()
-        viewModel:setHealth()
-        viewModel:setMaxHealth()
-    end)
-
-    viewModel:setAdornee(Part) -- pass in the component instance
+    viewModel:setAdornee(Part) -- send part to viewmodel to update
 
     Roact.mount(Roact.createElement(HealthGui, {
         viewModel = viewModel,
+        coinPile = Part,
     }), Players.LocalPlayer.PlayerGui, "Health")
 
-    -- these values are replaced inside of the viewmodel
 end
 
 

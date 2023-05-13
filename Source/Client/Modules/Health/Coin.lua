@@ -8,6 +8,9 @@ local Knit = require(ReplicatedStorage.Packages.Knit)
 
 local mouse = Players.LocalPlayer:GetMouse()
 
+local DEFAULT_HEALTH = 100
+local DEFAULT_MAX_HEALTH = 100
+
 -- MVVM modules
 local Coin = Component.new({ Tag = "Coin", Extensions = {} })
 
@@ -66,7 +69,8 @@ function Coin:Construct()
     self._trove:Add(ClickDetector.MouseClick:Connect(function(player : Player)
         -- do stuff to coin
         print("ClickDetector Activated!")
-        Knit.GetController("CoinController"):Attack(self.Instance)
+
+        Knit.GetController("CoinController"):Attack(self.Instance) -- passing through the clicked coinpile
     end))
 end
 

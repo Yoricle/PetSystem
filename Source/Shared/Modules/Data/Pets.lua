@@ -61,6 +61,8 @@ end
 ]]
 function Pets.GetDamagePerHit(pet: PetInstance): PetConfig
     local config = Pets.GetConfig(pet)
+
+    
 end
 
 return Pets

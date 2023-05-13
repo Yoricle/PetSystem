@@ -9,14 +9,14 @@ local HEALTH_FADE_DELAY: number = 2
 
 local HealthFrame = Roact.Component:extend("HealthFrame")
 
-function HealthFrame:init()
+function HealthFrame:init(props) -- passed down the viewModel table
     self:setState({
         health = self.props.viewModel.health,
-        maxHealth = self.props.viewModel.maxHealth
-    })
-
+        maxHealth = self.props.viewModel.maxHealth,
+    })  
+    print(props)
     -- Animation motor
-    self._healthMotor = Flipper.SingleMotor.new(self.state.health)
+    self._healthMotor = Flipper.SingleMotor.new(props.viewModel.health)
     self._healthBinding = RoactFlipper.getBinding(self._healthMotor)
 
     self.motor = Flipper.SingleMotor.new(0)
@@ -29,13 +29,14 @@ function HealthFrame:didMount()
         self:setState({
             health = viewModel.health,
             maxHealth = viewModel.maxHealth,
-            difference = viewModel.difference
+            difference = viewModel.difference,
+            adornee = viewModel.adornee,
         })
-        self._healthMotor:setGoal(Flipper.Spring.new(viewModel.health, {
+        self._healthMotor:setGoal(Flipper.Spring.new(viewModel.health, { -- this is the health number
             frequency = 1,
             dampingRatio = 1,
         }))
-        self.motor:setGoal(Flipper.Spring.new(viewModel.difference, {
+        self.motor:setGoal(Flipper.Spring.new(viewModel.difference, { -- this is the progress bar
             frequency = 1,
             dampingRatio = 1,
         }))
