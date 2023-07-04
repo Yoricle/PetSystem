@@ -1,13 +1,13 @@
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 
-local Knit = require(ReplicatedStorage.Packages.knit)
+local Knit = require(ReplicatedStorage.Packages.Knit)
 local Roact = require(ReplicatedStorage.Packages.Roact)
 local Flipper = require(ReplicatedStorage.Packages.Flipper) -- possibly used for egg movement
 local TableUtil = require(ReplicatedStorage.Packages.TableUtil)
 
 local Player = game.Players.LocalPlayer
 
-local PetInventoryGui = require(script.Parent.UI.PetInventoryGui)
+local PetInventoryGui = require(script.Parent.UI.PetGui)
 local PetViewModel = require(script.Parent.UI.PetViewModel)
 
 local DEFAULT_STORAGE_CAPACITY = 50

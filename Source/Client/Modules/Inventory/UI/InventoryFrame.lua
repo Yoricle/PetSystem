@@ -1,6 +1,8 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
 
 local Roact = require(ReplicatedStorage.Packages.Roact)
+local Knit = RunService:IsRunning() and require(ReplicatedStorage.Packages.Knit)
 
 local Flipper = require(ReplicatedStorage.Packages.Flipper)
 local RoactFlipper = require(ReplicatedStorage.Packages.RoactFlipper)
@@ -75,6 +77,11 @@ function InventoryFrame:render()
                     dampingRatio = 1
                 }))
             end,
+
+            [Roact.Event.Activated] = function()
+                local InventoryController = Knit.GetController("InventoryController")
+                InventoryController:ToggleInventory(self.state.inventoryVisible)
+            end
         },{
             UIAspectRatioConstraint = Roact.createElement("UIAspectRatioConstraint", {
                 AspectRatio = 1,
@@ -199,7 +206,7 @@ function InventoryFrame:render()
             HorizontalAlignment = Enum.HorizontalAlignment.Center,
             SortOrder = Enum.SortOrder.LayoutOrder,
             VerticalAlignment = Enum.VerticalAlignment.Center,
-        })
+        }),
     })
 end
 

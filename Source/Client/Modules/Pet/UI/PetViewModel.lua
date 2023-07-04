@@ -25,6 +25,11 @@ function PetViewModel:setMaxEquipped(newValue : number)
     self:update()
 end
 
+function PetViewModel:setPetInventory(Value : BoolValue)
+    self.inventoryVisible = Value
+    self:update()
+end
+
 function PetViewModel:setPetEquipped(newValue : BoolValue)
     self.Equipped = newValue
     self:update()

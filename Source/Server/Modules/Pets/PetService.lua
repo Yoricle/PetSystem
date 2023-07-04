@@ -62,10 +62,12 @@ end
 
 function PetService:KnitStart()
     print("PetService Started")
-
+--[[
     self.Client.PetEquipped:Connect(function(player : Player)
         -- Pet equipped from client, make sure this is checked carefully just incase player can abuse
     end)
+]]
+
 end
 
 local function deInitializePlayer(player: Player)

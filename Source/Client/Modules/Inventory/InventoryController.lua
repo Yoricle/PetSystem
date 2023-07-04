@@ -1,6 +1,9 @@
 local Players = game:GetService('Players')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
 
+local PetUI = script.Parent.Parent:WaitForChild("Pet").UI
+local PetFrame = require(PetUI:WaitForChild("PetFrame"))
+
 local Knit = require(ReplicatedStorage.Packages.Knit)
 local Roact = require(ReplicatedStorage.Packages.Roact)
 
@@ -16,6 +19,10 @@ function InventoryController:KnitStart()
     Roact.mount(Roact.createElement(InventoryGui,{
         viewModel = InventoryForViewModel,
     }), Players.LocalPlayer.PlayerGui, "Inventory")
+end
+
+function InventoryController:ToggleInventory(Value : BoolValue)
+    InventoryForViewModel:setInventoryVisible(Value)
 end
 
 function InventoryController:AdjustInventory(scaleX: number, scaleY: number)

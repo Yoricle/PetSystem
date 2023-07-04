@@ -15,6 +15,7 @@ function InventoryViewModel.new(): table
     self.sizeX = 0.5
     self.sizeY = 0.5
 
+    self.placeholderText = "Search" -- This probably won't change, but it's placeholder for the searchbar
     self.inventoryVisible = false
 
     return setmetatable(self, InventoryViewModel)
@@ -26,8 +27,9 @@ function InventoryViewModel:setInventorySize(scaleX: number, scaleY: number)
     self:update()
 end
 
-function InventoryViewModel:setInventoryVisible(newValue : BoolValue)
-    self.inventoryVisible = newValue
+function InventoryViewModel:setInventoryVisible(Visible : BoolValue)
+    Visible = not Visible
+    self.inventoryVisible = Visible
     self:update()
 end
 

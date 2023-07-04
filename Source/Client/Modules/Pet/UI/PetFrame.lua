@@ -1,19 +1,19 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Roact = require(ReplicatedStorage.Packages.roact)
+local Roact = require(ReplicatedStorage.Packages.Roact)
 
 local PetFrame = Roact.Component:extend("PetFrame")
 
 function PetFrame:init()
     self:setState({
-        value = self.props.viewModel.value,
+        inventoryVisible = self.props.viewModel.inventoryVisible,
     })
 end
 
 function PetFrame:didMount()
     self.props.viewModel.updated:Connect(function(viewModel)
         self:setState({
-            value = viewModel.value,
+            inventoryVisible = viewModel.inventoryVisible,
         })
     end)
 end

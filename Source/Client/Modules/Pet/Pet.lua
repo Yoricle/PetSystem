@@ -11,7 +11,7 @@ local RunService = game:GetService("RunService")
 local Library = ReplicatedStorage:WaitForChild("Assets").Pets
 
 
-local Knit = RunService:IsRunning and require(ReplicatedStorage.Packages.Knit)
+local Knit = RunService:IsRunning() and require(ReplicatedStorage.Packages.Knit)
 local Component = require(ReplicatedStorage.Packages.Component)
 local Comm = require(ReplicatedStorage.Packages.Comm)
 

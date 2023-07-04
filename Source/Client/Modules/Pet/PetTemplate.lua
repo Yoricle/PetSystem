@@ -1,6 +1,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local Roact = require(ReplicatedStorage.Packages.roact)
+local Roact = require(ReplicatedStorage.Packages.Roact)
 
 local PetTemplate = Roact.Component:extend("PetTemplate")
 
